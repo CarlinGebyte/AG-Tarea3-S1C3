@@ -102,31 +102,32 @@ findByName.addEventListener('click', e => {
     e.preventDefault();
     let input = document.getElementById('inputBuscar').value;
     let data = JSON.parse(localStorage.getItem('citas'));
-    
-    let filtro = data.filter(datos => datos.nombre.toLowerCase().includes(input.toLowerCase()));
-    console.log(filtro);
-    
-    inputSearch.innerHTML = "";
-    
-    filtro.length === 0? 
-        inputSearch.innerHTML += `<div>El nombre ${input} no existe</div>`
-        : 
-        filtro.map(schedule => {
-        const {nombre, fecha, hora, sintomas} = schedule;
-        
-        inputSearch.innerHTML += `
-            <div>
-            <div>
-                <h1>${nombre}</h1>
-            </div>
-            <div>
-                <h3>${fecha}</h3>
-                <h3>${hora}</h3>
-            </div>
-                <h3>${sintomas}</h3>
-            </div>
-        `;
+    if (data !== null){
+        let filtro = data.filter(datos => datos.nombre.toLowerCase().includes(input.toLowerCase()));
+        console.log(filtro);
+
+        inputSearch.innerHTML = "";
+
+        filtro.length === 0? 
+            inputSearch.innerHTML += `<div>El nombre ${input} no existe</div>`
+            : 
+            filtro.map(schedule => {
+            const {nombre, fecha, hora, sintomas} = schedule;
+
+            inputSearch.innerHTML += `
+                <div>
+                <div>
+                    <h1>${nombre}</h1>
+                </div>
+                <div>
+                    <h3>${fecha}</h3>
+                    <h3>${hora}</h3>
+                </div>
+                    <h3>${sintomas}</h3>
+                </div>
+            `;
     });   
+    }
 });
 
 
